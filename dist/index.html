@@ -28,7 +28,28 @@
 <script src="//cdn.jsdelivr.net/ace/1.2.3/min/worker-javascript.js"></script>
 <script src="//cdn.jsdelivr.net/ace/1.2.3/min/worker-json.js"></script>
 
+<style>
+  #my_editor
+  {
+    width: 400px;
+    height: 400px;
+  }
+
+</style>
+
 <body>
 Тут будет интерфейс
+<div id="my_editor">
+  
+</div>
+
+<script>
+  (function() {
+
+    var my_editor = ace.edit('my_editor');
+    my_editor.setValue('Привет');
+    
+  }());
+</script>
 </body>
 </html>
