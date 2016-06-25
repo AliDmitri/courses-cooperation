@@ -29,27 +29,121 @@
 <script src="//cdn.jsdelivr.net/ace/1.2.3/min/worker-json.js"></script>
 
 <style>
-  #my_editor
-  {
-    width: 400px;
-    height: 400px;
+  .header {
+    font-family: "PT Sans",Helvetica,Arial,sans-serif;
+    text-align: center;
+    vertical-align: bottom;
+    font-size: 1.2em;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    background: #2d2d44;
+    color: #fff;
+  }
+  .process {
+    width: 1000px;
+    height: 900px;
+    /*position: relative;*/
+    margin: auto;
+    /*margin-left: auto;*/
   }
 
+  .html_editor {
+    position: relative;
+    width: 400px;
+    height: 300px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 2px rgba(0,0,0,.5);
+  }
+  .editors {
+    float: left;
+    width: 500px;
+    margin-left: 20px;
+    margin-right: 20px;
+    color: #618ad2;
+  }
+  .css_editors {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    margin-bottom: 20px;
+  }
+  .css_editor {
+    height: 200px;
+    margin-bottom: 10px;
+    box-shadow: 0 0 2px rgba(0,0,0,.5);
+
+  }
+
+  .result {
+    float: left;
+    position: relative;
+    height: 750px;
+    width: 400px;
+    margin-bottom: 20px;
+    border: 4px solid #618ad2;
+    border-top: 30px solid #618ad2;
+    border-radius: 3px;
+  }
+  iframe {
+    height: 100%;
+    width: 100%;
+    border: none;
+  }
 </style>
+<div class="header">
+  Игровая механика "Кооперации"
+</div>
 
 <body>
-Тут будет интерфейс
-<div id="my_editor">
-  
+<div class="process">
+  <div class="editors">
+    <b>HTML <i>РЕДАКТОР</i></b>
+    <div class="html_editor"></div>
+    <div class="css_editors">
+      <b>CSS <i>РЕДАКТОР 1</i></b>
+      <div class="css_editor editor_own"></div>
+      <b>CSS <i>РЕДАКТОР 2</i></b>
+      <div class="css_editor editor_partner"></div>
+    </div>
+  </div>
+  <div class="result">
+    <iframe id="FileFrame" src="about:blank"></iframe>
+  </div>
 </div>
 
 <script>
   (function() {
+    var html_editor = ace.edit(document.querySelector('.html_editor'));
+    html_editor.setValue('html_editor');
+//    html_editor.setTheme("ace/theme/monokai");
+    html_editor.getSession().setMode("ace/mode/html");
+    html_editor.setHighlightActiveLine(false);
+    html_editor.setDisplayIndentGuides(false);
+    html_editor.setShowPrintMargin(false);
+    html_editor.setHighlightSelectedWord(false);
+    html_editor.setBehavioursEnabled(false);
+    html_editor.setFadeFoldWidgets(false);
 
-    var my_editor = ace.edit('my_editor');
-    my_editor.setValue('Привет');
-    
+    var editor_partnerr = ace.edit(document.querySelector('.editor_partner'));
+    editor_partnerr.setValue('editor_partner');
+//    editor_partnerr.setTheme("ace/theme/monokai");
+    editor_partnerr.getSession().setMode("ace/mode/css");
+
+    var editor_own = ace.edit(document.querySelector('.editor_own'));
+    editor_own.setValue('editor_own');
+//    editor_own.setTheme("ace/theme/monokai");
+    editor_own.getSession().setMode("ace/mode/css");
+
   }());
 </script>
+
+<script type="text/javascript">
+  var doc = document.getElementById('FileFrame').contentWindow.document;
+  doc.open();
+  doc.write('<html><head><title></title></head><body></body></html>');
+  doc.close();
+</script>
+
 </body>
 </html>
